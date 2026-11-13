@@ -79,3 +79,15 @@ class PilotTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_source_hash_normalizes_crlf(tmp_path):
+    from src.llm.prepare_review import source_sha256
+
+    lf = tmp_path / "lf"
+    crlf = tmp_path / "crlf"
+    lf.write_bytes(b"a,b\nquoted,\"line 1\nline 2\"\n")
+    crlf.write_bytes(lf.read_bytes().replace(b"\n", b"\r\n"))
+    assert source_sha256(lf) == source_sha256(crlf)
+    crlf.write_bytes(b"different\r\n")
+    assert source_sha256(lf) != source_sha256(crlf)

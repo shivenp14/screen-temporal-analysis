@@ -35,7 +35,7 @@ See [the annotation workflow](annotations/README.md), [label guidelines](annotat
 [midterm draft](reports/midterm/report.md), and [team handoff checklist](reports/midterm/integration_checklist.md).
 The proposal maps SCREEN's Mixed stance to Neutral for the main three-class task; keep the original
 four-class labels for review and diagnostics. The released CSVs are intermediate stages, so consult
-the [release audit](results/metrics/release_audit.json) before constructing training data.
+the [release audit](results/metrics/release_audit.json) before constructing training data. Source file SHA-256 hashes are computed over bytes with CRLF line endings normalized to LF; all other bytes are preserved.
 
 The review/LLM preparation tools use only Python's standard library. Run their checks with
 `python -m unittest discover -s tests -v`. Human reviews and live model results remain pending.

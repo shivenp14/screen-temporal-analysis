@@ -16,6 +16,11 @@ def digest(text):
     return hashlib.sha256(" ".join(text.split()).encode()).hexdigest()
 
 
+def source_sha256(path):
+    """Hash source bytes with CRLF line endings normalized to LF."""
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def write_csv(path, rows, fields):
     with path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
@@ -41,7 +46,7 @@ def prepare(source, output, seed=584):
         ids = [r["doc_id"] for r in rows]
         texts = [r.get("full_text", r.get("text", "")) for r in rows]
         audit["files"][name] = {
-            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "sha256": source_sha256(path),
             "rows": len(rows), "columns": list(rows[0]),
             "duplicate_ids": len(ids) - len(set(ids)),
             "duplicate_normalized_texts": len(texts) - len({digest(t) for t in texts}),
@@ -59,7 +64,7 @@ def prepare(source, output, seed=584):
     for platform in ("snapchat", "youtube"):
         path = source / "Dataset" / f"news-{platform}-noagegroup-mental-2024.jsonl"
         articles = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-        audit["files"][path.name] = {"rows": len(articles), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+        audit["files"][path.name] = {"rows": len(articles), "sha256": source_sha256(path)}
         for article in articles:
             body = article.get("body") or article.get("text") or ""
             if isinstance(body, list):
