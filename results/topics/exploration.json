@@ -1,0 +1,441 @@
+{
+  "status": "exploratory_only_no_topic_gold",
+  "source_commit": "246d3d365d5898f6fdf5240264215e49b082d743",
+  "run_utc": "2026-11-13T22:05:40.381430+00:00",
+  "released_csv_inventory": {
+    "High Confidence Relevant.csv": {
+      "rows": 932,
+      "columns": [
+        "doc_id",
+        "platform",
+        "title",
+        "full_text",
+        "pct_A",
+        "dec_A",
+        "rel_A_raw",
+        "pct_B",
+        "dec_B",
+        "rel_B_raw",
+        "stance_A",
+        "stance_A_raw",
+        "stance_B",
+        "stance_B_raw",
+        "final_status",
+        "final_label",
+        "flag_reason"
+      ],
+      "topic_columns": [],
+      "sha256": "9d689323e9f9d02b8124dcbbea14a475534f039a4a3716ff0e95aabdcd0d6ae3"
+    },
+    "Recovered Relevant Articles Doccano.csv": {
+      "rows": 220,
+      "columns": [
+        "id",
+        "text",
+        "doc_id",
+        "platform",
+        "title",
+        "pct_A",
+        "pct_B",
+        "dec_A",
+        "dec_B",
+        "flag_reason",
+        "label"
+      ],
+      "topic_columns": [],
+      "sha256": "505c05950e6b670fb858e3853af8d846483e2123cf4858a914419b007e447156"
+    },
+    "Relevance Ambiguous.csv": {
+      "rows": 463,
+      "columns": [
+        "id",
+        "doc_id",
+        "platform",
+        "title",
+        "full_text",
+        "pct_A",
+        "pct_B",
+        "dec_A",
+        "dec_B",
+        "flag_reason"
+      ],
+      "topic_columns": [],
+      "sha256": "13f198539fc37d82894aaf9427e6a1d407ce38044bd19dacaf51c81559acbfff"
+    },
+    "Stance Ambiguous.csv": {
+      "rows": 342,
+      "columns": [
+        "id",
+        "doc_id",
+        "platform",
+        "title",
+        "full_text",
+        "stance_A",
+        "stance_B",
+        "pct_A",
+        "pct_B",
+        "flag_reason"
+      ],
+      "topic_columns": [],
+      "sha256": "f66b4b66613823020997a8631c5ac3e72ae02c3eb1a3f5f6b9d1cba687823d3c"
+    }
+  },
+  "dataset_sha256": "838634046369674f42fd89b63728cb39af73df72af62941a155e3079f08847b8",
+  "split_manifest_sha256": "743631c863d88136963b7ca2fca69a2944a2e733472d32d93853ff38dd23d1c5",
+  "training_article_platform_rows": 339,
+  "unique_training_texts": 282,
+  "held_out_texts_used": 0,
+  "vocabulary": [
+    "Anxiety",
+    "Depression",
+    "Suicide/Self-Harm",
+    "Bullying/Cyberbullying",
+    "Body Image/Eating Disorders",
+    "Addiction/Overuse",
+    "Sleep Disruption",
+    "Policy/Lawsuits/Bans",
+    "School/Education",
+    "Therapy/Access to Care",
+    "Stigma/Awareness",
+    "Parental Controls/Safety Features"
+  ],
+  "config": {
+    "n_components": 8,
+    "seed": 584,
+    "max_features": 10000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_df": 0.95,
+    "stop_words": "english",
+    "init": "nndsvda",
+    "max_iter": 1000,
+    "tol": 0.0001
+  },
+  "versions": {
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "iterations": 37,
+  "reconstruction_error_not_f1": 14.692690404423848,
+  "zero_weight_texts": 0,
+  "components": [
+    {
+      "component": 0,
+      "top_terms": [
+        "social",
+        "media",
+        "social media",
+        "said",
+        "children",
+        "platforms",
+        "use",
+        "mental health",
+        "teens",
+        "young",
+        "time",
+        "parents"
+      ],
+      "top_term_weights": [
+        0.8399913495519797,
+        0.8111211999247042,
+        0.7834589872446095,
+        0.306122996381488,
+        0.25346414364615716,
+        0.24917487382182646,
+        0.24531558196540648,
+        0.23665720586411848,
+        0.21091436155786616,
+        0.20544799324818255,
+        0.1988871357935339,
+        0.18463760899706178
+      ],
+      "strongest_component_count": 104,
+      "representative_training_ids": [
+        "snapchat|214|Social media vs youth mental health: What is the impact?",
+        "snapchat|53|Analysis: Should India Ban Social Media For Under-16s, Like Australia?",
+        "snapchat|177|US surgeon general says \u2018it is time\u2019 to require warning labels on social media apps to help with mental health crisis"
+      ]
+    },
+    {
+      "component": 1,
+      "top_terms": [
+        "boards",
+        "school",
+        "board",
+        "school boards",
+        "district school",
+        "school board",
+        "district",
+        "toronto",
+        "social",
+        "students",
+        "social media",
+        "media"
+      ],
+      "top_term_weights": [
+        0.5110367352076904,
+        0.4698471670621537,
+        0.35555355655692295,
+        0.35454663997308755,
+        0.3542076836794601,
+        0.3470742601670914,
+        0.28706071159465557,
+        0.24483024098266176,
+        0.19988205889871166,
+        0.1942520282087047,
+        0.19278251013144984,
+        0.18895250540471728
+      ],
+      "strongest_component_count": 25,
+      "representative_training_ids": [
+        "snapchat|273|4 Canadian school boards sue Snapchat, TikTok and Meta for disrupting students' education",
+        "snapchat|275|4 Canadian school boards sue Snapchat, TikTok and Meta for disrupting students' education - WPXI",
+        "snapchat|276|4 Canadian school boards sue Snapchat, TikTok and Meta for disrupting students' education"
+      ]
+    },
+    {
+      "component": 2,
+      "top_terms": [
+        "city",
+        "new york",
+        "york",
+        "lawsuit",
+        "companies",
+        "new",
+        "adams",
+        "york city",
+        "youth",
+        "social",
+        "said",
+        "social media"
+      ],
+      "top_term_weights": [
+        0.639184261769128,
+        0.38646626383634897,
+        0.38190046227828994,
+        0.36957542692695816,
+        0.34547911001688053,
+        0.31882601016996354,
+        0.31766081217484265,
+        0.30266342314417455,
+        0.2703019940054968,
+        0.26983173501989177,
+        0.2574398442376477,
+        0.25090117618921765
+      ],
+      "strongest_component_count": 50,
+      "representative_training_ids": [
+        "snapchat|464|TikTok, Facebook and YouTube sued by New York City for alleged harm to kids' mental health",
+        "snapchat|431|TikTok, Facebook and YouTube sued by New York City for alleged harm to kids\u2019 mental health",
+        "snapchat|433|TikTok, Facebook and YouTube sued by New York City for alleged harm to kids\u2019 mental health"
+      ]
+    },
+    {
+      "component": 3,
+      "top_terms": [
+        "constantly",
+        "teenagers",
+        "national news",
+        "report",
+        "pew",
+        "said",
+        "use",
+        "teens",
+        "teenagers said",
+        "tiktok constantly",
+        "said visit",
+        "online constantly"
+      ],
+      "top_term_weights": [
+        0.2575807615931566,
+        0.24357574186538103,
+        0.18751394080626677,
+        0.17966595159063625,
+        0.16898954520816525,
+        0.16335715047976293,
+        0.16294316425055727,
+        0.15835912454163256,
+        0.15603343368831182,
+        0.15603343368831182,
+        0.15603343368831182,
+        0.15603343368831182
+      ],
+      "strongest_component_count": 6,
+      "representative_training_ids": [
+        "youtube|745|Nearly half of US teens are online \u2018constantly,\u2019 Pew report finds",
+        "youtube|716|Nearly half of US teens are online \u2018constantly\u2019: Pew report",
+        "youtube|731|Nearly half of US teens are online \u2018constantly,\u2019 Pew report finds"
+      ]
+    },
+    {
+      "component": 4,
+      "top_terms": [
+        "don",
+        "annie",
+        "high school",
+        "dear",
+        "senior",
+        "school senior",
+        "high",
+        "dear annie",
+        "advice",
+        "flags",
+        "red flags",
+        "ok end"
+      ],
+      "top_term_weights": [
+        0.49366140389414775,
+        0.37027644539198157,
+        0.315646251270561,
+        0.313032391870098,
+        0.2816664453706186,
+        0.22745799871231112,
+        0.22734899695920913,
+        0.21482369753178848,
+        0.21202802037773213,
+        0.19641738867661912,
+        0.19641738867661912,
+        0.19641738867661912
+      ],
+      "strongest_component_count": 5,
+      "representative_training_ids": [
+        "snapchat|141|Dear Annie: Why one high school senior never uses SnapChat",
+        "snapchat|144|Dear Annie: Here\u2019s why I\u2019m happy I stopped using social media",
+        "snapchat|143|Dear Annie: Advice from a rising high school senior on social media usage"
+      ]
+    },
+    {
+      "component": 5,
+      "top_terms": [
+        "eu",
+        "commission",
+        "dsa",
+        "illegal",
+        "risks",
+        "information",
+        "youtube snapchat",
+        "requested",
+        "recommender",
+        "systems",
+        "content",
+        "recommender systems"
+      ],
+      "top_term_weights": [
+        0.4285954428124708,
+        0.4145766703611388,
+        0.38720419286963664,
+        0.28072134111300856,
+        0.2768413687700529,
+        0.264630407244359,
+        0.23105763357247686,
+        0.2297191427218638,
+        0.21682655981278687,
+        0.2141794166528028,
+        0.2131536197776171,
+        0.201314068814918
+      ],
+      "strongest_component_count": 8,
+      "representative_training_ids": [
+        "youtube|985|EU requests info from YouTube, Snapchat, TikTok on content algorithms - SWI swissinfo.ch",
+        "snapchat|75|EU requests info from YouTube, Snapchat, TikTok on content algorithms",
+        "snapchat|87|EU demands information from YouTube, Snapchat, TikTok on content algorithms"
+      ]
+    },
+    {
+      "component": 6,
+      "top_terms": [
+        "arkansas",
+        "lawsuit",
+        "claims",
+        "state",
+        "youtube",
+        "claims site",
+        "youth",
+        "site",
+        "mental health",
+        "fueling mental",
+        "google",
+        "fueling"
+      ],
+      "top_term_weights": [
+        0.3213661412195545,
+        0.31413035420299507,
+        0.2455464315966103,
+        0.2382893173600522,
+        0.21636365768826718,
+        0.15941522517309334,
+        0.15359225928077372,
+        0.15134635624482984,
+        0.146895733511789,
+        0.13311939506249762,
+        0.12810000400340646,
+        0.12425098190639554
+      ],
+      "strongest_component_count": 23,
+      "representative_training_ids": [
+        "youtube|1003|Arkansas sues YouTube over claims that the site is fueling a mental health crisis | The Independent",
+        "youtube|1052|Arkansas sues YouTube over claims that the site is fueling a mental health crisis | News Channel 3-12",
+        "youtube|1024|Arkansas sues YouTube over claims that the site is fueling a mental health crisis - KVIA"
+      ]
+    },
+    {
+      "component": 7,
+      "top_terms": [
+        "children",
+        "quality",
+        "nandy",
+        "spider",
+        "high quality",
+        "content",
+        "quality content",
+        "youtube",
+        "said",
+        "government",
+        "online platforms",
+        "online"
+      ],
+      "top_term_weights": [
+        0.3077322653754695,
+        0.28826468431372154,
+        0.2689815870337039,
+        0.25031583339319047,
+        0.2224559708294942,
+        0.2001735338613303,
+        0.19740854831438692,
+        0.17607998215326148,
+        0.13733455179699616,
+        0.1343583461750004,
+        0.13290710271892642,
+        0.1303577104366545
+      ],
+      "strongest_component_count": 61,
+      "representative_training_ids": [
+        "youtube|678|YouTube urged by Nandy to promote higher quality children\u2019s content",
+        "youtube|682|YouTube urged by Nandy to promote higher quality children\u2019s content",
+        "youtube|683|YouTube must do more to educate children, says culture secretary"
+      ]
+    }
+  ],
+  "keyword_candidate_counts_not_prevalence": {
+    "Anxiety": 60,
+    "Depression": 53,
+    "Suicide/Self-Harm": 49,
+    "Bullying/Cyberbullying": 38,
+    "Body Image/Eating Disorders": 34,
+    "Addiction/Overuse": 139,
+    "Sleep Disruption": 25,
+    "Policy/Lawsuits/Bans": 169,
+    "School/Education": 152,
+    "Therapy/Access to Care": 24,
+    "Stigma/Awareness": 36,
+    "Parental Controls/Safety Features": 29
+  },
+  "micro_f1": null,
+  "macro_f1": null,
+  "per_topic_f1": null,
+  "metrics_unavailable_reason": "Released CSVs have no topic columns; no adjudicated topic gold is available."
+}
