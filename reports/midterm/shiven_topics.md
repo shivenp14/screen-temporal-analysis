@@ -6,14 +6,19 @@ This contribution takes the fallback specified in the task: preliminary topic ex
 
 ## Reproduce
 
-After applying the data PR and running preprocessing:
+Install the requirements in Python 3.12 and obtain the pinned source clone at `data/raw/screen-source` as described in `annotations/README.md`. Run from the project root with fresh output directories:
 
 ```sh
-python -m src.topics.baseline
+python -m src.data.preprocess --source data/raw/screen-source --output data/processed/screen-reproduction --public results/data-reproduction
+python -m src.topics.baseline --source data/raw/screen-source --dataset data/processed/screen-reproduction/articles.jsonl --preprocessing results/data-reproduction/preprocessing.json --output results/topics-reproduction
 python -m unittest discover -s tests -v
 ```
 
-The command verifies the pinned source and dataset hash, audits all four released CSV schemas, and uses only training records. It collapses cross-platform exact-text copies for exploration, leaving **282 distinct training texts** from 339 article/platform training records. Validation, test, and review-reserved texts are not used. The outputs are the inventory/configuration/components in `results/topics/exploration.json`, keyword candidates in `keyword_candidates.jsonl`, and a component-count plot.
+These commands preserve the committed results. For another run, choose new empty directories for all three output paths and update `--dataset` and `--preprocessing` to match. The new topic outputs are written under `results/topics-reproduction/`.
+
+Source CSV inventory hashes normalize CRLF line endings to LF before SHA-256, matching the release audit convention. Generated dataset and split-manifest hashes remain hashes of their exact artifact bytes.
+
+The topic command verifies the pinned source and dataset hash, audits all four released CSV schemas, and uses only training records. It collapses cross-platform exact-text copies for exploration, leaving **282 distinct training texts** from 339 article/platform training records. Validation, test, and review-reserved texts are not used. The committed reference outputs are the inventory/configuration/components in `results/topics/exploration.json`, keyword candidates in `results/topics/keyword_candidates.jsonl`, and a component-count plot. Reproduction writes those same filenames into the fresh topic output directory.
 
 ## Vocabulary and label status
 

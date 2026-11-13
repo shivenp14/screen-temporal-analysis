@@ -38,6 +38,11 @@ CUES = {
 }
 
 
+def source_sha256(path):
+    """Hash source bytes with CRLF normalized to LF, as in the release audit."""
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def topic_inventory(source):
     commit = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
     if commit != SOURCE_COMMIT or subprocess.check_output(
@@ -51,7 +56,7 @@ def topic_inventory(source):
             rows = list(reader)
         topic_fields = [field for field in fields if "topic" in field.lower()]
         inventory[path.name] = {"rows": len(rows), "columns": fields, "topic_columns": topic_fields,
-                                "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+                                "sha256": source_sha256(path)}
     if any(item["topic_columns"] for item in inventory.values()):
         raise ValueError("Topic fields found: inspect their provenance before using the no-label fallback")
     return inventory
