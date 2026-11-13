@@ -41,3 +41,15 @@ Each team member creates their own `.venv`; the shared `requirements.txt` record
 Singh et al. (2026). *SCREEN: A News Media Stance Dataset for Understanding Youth Mental Health Narratives Around Video-Based Social Media.*
 
 [SCREEN Dataset Repository](https://github.com/LEAF-Lab-Stevens/SCREEN-Dataset)
+
+The raw files are stored locally in `data/raw/` and are excluded from Git. To reproduce the current copy, run from the repository root:
+
+```sh
+git clone https://github.com/LEAF-Lab-Stevens/SCREEN-Dataset.git /tmp/screen-dataset-source
+git -C /tmp/screen-dataset-source checkout 246d3d365d5898f6fdf5240264215e49b082d743
+mkdir -p data/raw
+cp /tmp/screen-dataset-source/Dataset/* data/raw/
+cp /tmp/screen-dataset-source/LICENSE data/raw/
+```
+
+The source repository supplies two original news JSONL files and four CSV files from intermediate relevance and stance annotation stages. The files are not a single ready-made 1,492-row labeled table; inspect the annotation pipeline and reconcile records before building the analysis dataset. The source repository provides its data under the MIT license; its license is included alongside the local copy.
