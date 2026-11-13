@@ -17,6 +17,18 @@ Using the [SCREEN dataset](https://github.com/LEAF-Lab-Stevens/SCREEN-Dataset), 
 - SetFit and BERTopic
 - Temporal trend analysis and visualization
 
+## Python setup
+
+Use Python 3.12 to keep the team's environments consistent. From the repository root:
+
+```sh
+python3.12 -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+Each team member creates their own `.venv`; the shared `requirements.txt` records project dependencies. Add dependencies to that file when introducing them, and rerun the install command after pulling updates. Run `deactivate` when finished.
+
 ## Team
 
 - Collin Vo
