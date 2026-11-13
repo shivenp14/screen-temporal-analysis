@@ -192,9 +192,8 @@ def main():
     parser.add_argument("--output", type=Path, default=Path("data/processed/screen"))
     parser.add_argument("--public", type=Path, default=Path("results/data"))
     args = parser.parse_args()
-    for path in (args.output, args.public):
-        if path.exists() and any(path.iterdir()):
-            parser.error(f"Choose an empty output folder: {path}")
+    if args.output.exists() and any(args.output.iterdir()):
+        parser.error(f"Choose an empty processed-data folder: {args.output}")
     print(json.dumps(prepare(args.source, args.review_manifest, args.output, args.public), indent=2))
 
 

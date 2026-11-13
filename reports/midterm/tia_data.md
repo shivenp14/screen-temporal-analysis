@@ -12,7 +12,7 @@ python -m src.analysis.temporal
 python -m unittest discover -s tests -v
 ```
 
-Preprocessing writes full article records under ignored `data/processed/screen/`. Its public outputs are `results/data/preprocessing.json`, `split_manifest.csv`, and `excluded_records.csv`. Use fresh output folders for a second run; the command refuses to overwrite existing data. Temporal summaries and SVG figures are written to `results/temporal/`.
+Preprocessing writes full article records under ignored `data/processed/screen/`. Its public outputs are `results/data/preprocessing.json`, `split_manifest.csv`, and `excluded_records.csv`. The command refreshes those generated public summaries, allowing reproduction in a fresh clone that already contains the committed summaries. It refuses to overwrite a nonempty processed-data folder; for a second run use a new `--output` path and optionally a new `--public` path. Temporal summaries and SVG figures are written to `results/temporal/`.
 
 ## Data decisions
 
