@@ -8,3 +8,5 @@ data/processed/review*/
 results/llm_requests/
 output/pdf/
 tmp/pdfs/
+data/processed/screen/
+results/models/

@@ -1,0 +1,65 @@
+{
+  "dataset_scope": "accepted intermediate records only; not the final 1492-row corpus",
+  "source_commit": "246d3d365d5898f6fdf5240264215e49b082d743",
+  "seed": 584,
+  "input_rows": 932,
+  "retained_rows": 758,
+  "exclusions": {
+    "duplicate_same_platform_text": 174
+  },
+  "missing_dates": 0,
+  "date_min": "2024-01-01",
+  "date_max": "2024-12-31",
+  "unique_texts": 614,
+  "duplicate_groups": 437,
+  "near_duplicate_pairs_including_review": 1123,
+  "similarity": "token-five-shingle Jaccard >= 0.9; connected components",
+  "splits": {
+    "train": {
+      "rows": 339,
+      "labels": {
+        "Negative": 257,
+        "Neutral": 48,
+        "Positive": 34
+      }
+    },
+    "validation": {
+      "rows": 113,
+      "labels": {
+        "Neutral": 16,
+        "Negative": 86,
+        "Positive": 11
+      }
+    },
+    "test": {
+      "rows": 113,
+      "labels": {
+        "Neutral": 15,
+        "Negative": 86,
+        "Positive": 12
+      }
+    },
+    "review_reserved": {
+      "rows": 193,
+      "labels": {
+        "Neutral": 67,
+        "Negative": 113,
+        "Positive": 13
+      }
+    }
+  },
+  "platform_labels": {
+    "youtube": {
+      "Negative": 285,
+      "Positive": 70,
+      "Neutral": 62
+    },
+    "snapchat": {
+      "Negative": 257,
+      "Neutral": 84
+    }
+  },
+  "dataset_sha256": "838634046369674f42fd89b63728cb39af73df72af62941a155e3079f08847b8",
+  "split_manifest_sha256": "743631c863d88136963b7ca2fca69a2944a2e733472d32d93853ff38dd23d1c5",
+  "review_manifest_sha256": "8db628b9fd4e667205f5f893caf8090496e5532e831b55dadd9d7f34912f57b3"
+}
