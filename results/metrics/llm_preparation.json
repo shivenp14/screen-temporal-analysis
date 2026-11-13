@@ -1,0 +1,13 @@
+{
+  "status": "prepared_not_executed",
+  "review_status": "pending",
+  "mode": "zero-shot",
+  "request_count": 36,
+  "max_chars": 12000,
+  "truncated_count": 1,
+  "requests_sha256": "f0d902a93f0f7e1a0a37752cd32dbcc5fbc4bad014c8422b0b728ec6cdafa544",
+  "source_commit": "246d3d365d5898f6fdf5240264215e49b082d743",
+  "model": null,
+  "metrics": null,
+  "reason_not_executed": "No model API credentials configured; independent review is pending."
+}

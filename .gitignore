@@ -4,3 +4,7 @@ __pycache__/
 .ipynb_checkpoints/
 data/raw/*
 !data/raw/.gitkeep
+data/processed/review*/
+results/llm_requests/
+output/pdf/
+tmp/pdfs/
