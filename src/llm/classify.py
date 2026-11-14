@@ -20,6 +20,12 @@ Neutral: descriptive coverage with no clear leaning.
 Mixed: substantive benefits and harms both receive meaningful weight.
 Do not turn a safety feature into a benefit unless the article frames it that way.
 Select zero to three primary topics with explicit evidence tied to mental health.
+A primary topic needs substantive supporting detail, not a passing mention,
+related-story link, or boilerplate. Prioritize central topics if more than three apply.
+Apply topics only to the named platform or general claims clearly including it.
+School/Education includes learning, educational content, and public-health education
+with an explicit youth well-being connection; student status alone is insufficient.
+Do not invent a diagnosis from general distress or add topics outside the vocabulary.
 An empty topic list means no listed topic has enough evidence.
 Allowed topics: {topics}
 Return only JSON with exactly these fields:

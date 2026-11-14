@@ -37,8 +37,7 @@ The proposal maps SCREEN's Mixed stance to Neutral for the main three-class task
 four-class labels for review and diagnostics. The released CSVs are intermediate stages, so consult
 the [release audit](results/metrics/release_audit.json) before constructing training data. Source file SHA-256 hashes are computed over bytes with CRLF line endings normalized to LF; all other bytes are preserved.
 
-The review/LLM preparation tools use only Python's standard library. Run their checks with
-`python -m unittest discover -s tests -v`. Human reviews and live model results remain pending.
+The sentiment baseline and temporal summaries are available under `results/`. Human review, live LLM evaluation, and supervised topic scores remain pending. Run the project checks with `python -m unittest discover -s tests -v`.
 
 ## Team members
 
@@ -61,3 +60,8 @@ git -C data/raw/screen-source checkout 246d3d365d5898f6fdf5240264215e49b082d743
 ```
 
 The source repository supplies two original news JSONL files and four CSV files from intermediate relevance and stance annotation stages. Keep the pinned clone intact: preprocessing checks its commit and reads files directly from `Dataset/`. The files are not a single ready-made 1,492-row labeled table; inspect the annotation pipeline and reconcile records before building the analysis dataset. The source repository provides its data under the MIT license.
+
+
+## Topic exploration
+
+The released SCREEN CSVs do not include topic labels, so the current topic results are exploratory. To reproduce the training-only TF-IDF/NMF analysis and prepare the local review packet, use the commands in [Shiven's topic report](reports/midterm/shiven_topics.md). The packet contains 40 training articles and six separate practice articles; it has no completed annotations.
