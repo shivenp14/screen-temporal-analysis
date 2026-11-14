@@ -1,0 +1,156 @@
+{
+  "source_commit": "246d3d365d5898f6fdf5240264215e49b082d743",
+  "seed": 584,
+  "files": {
+    "High Confidence Relevant.csv": {
+      "sha256": "5301b9a932f207147f6bb394708186c41078740bd3fd695131eaeceab989d837",
+      "rows": 932,
+      "columns": [
+        "doc_id",
+        "platform",
+        "title",
+        "full_text",
+        "pct_A",
+        "dec_A",
+        "rel_A_raw",
+        "pct_B",
+        "dec_B",
+        "rel_B_raw",
+        "stance_A",
+        "stance_A_raw",
+        "stance_B",
+        "stance_B_raw",
+        "final_status",
+        "final_label",
+        "flag_reason"
+      ],
+      "duplicate_ids": 0,
+      "duplicate_normalized_texts": 318,
+      "empty_texts": 0,
+      "platforms": {
+        "snapchat": 407,
+        "youtube": 525
+      },
+      "labels": {
+        "Negative": 660,
+        "Mixed": 180,
+        "Neutral": 21,
+        "Positive": 71
+      }
+    },
+    "Recovered Relevant Articles Doccano.csv": {
+      "sha256": "ff06b499e2d6dab3398eab81ef46e589379afb0f22284ea17a2b72f6c9fdcd0e",
+      "rows": 220,
+      "columns": [
+        "id",
+        "text",
+        "doc_id",
+        "platform",
+        "title",
+        "pct_A",
+        "pct_B",
+        "dec_A",
+        "dec_B",
+        "flag_reason",
+        "label"
+      ],
+      "duplicate_ids": 0,
+      "duplicate_normalized_texts": 30,
+      "empty_texts": 0,
+      "platforms": {
+        "snapchat": 8,
+        "youtube": 212
+      },
+      "labels": {
+        "MH_Relevant": 220
+      }
+    },
+    "Relevance Ambiguous.csv": {
+      "sha256": "29f722d05ecc2f70d1d7d1d5ac94e8163b24c14b21b76487382c4e3f41b5548f",
+      "rows": 463,
+      "columns": [
+        "id",
+        "doc_id",
+        "platform",
+        "title",
+        "full_text",
+        "pct_A",
+        "pct_B",
+        "dec_A",
+        "dec_B",
+        "flag_reason"
+      ],
+      "duplicate_ids": 0,
+      "duplicate_normalized_texts": 55,
+      "empty_texts": 0,
+      "platforms": {
+        "snapchat": 45,
+        "youtube": 418
+      },
+      "labels": {
+        "unavailable": 463
+      }
+    },
+    "Stance Ambiguous.csv": {
+      "sha256": "4df2f4a225e6fcaef9409361bfa2c2ecbd7ea43b3a303e06e3af9638ed4a0439",
+      "rows": 342,
+      "columns": [
+        "id",
+        "doc_id",
+        "platform",
+        "title",
+        "full_text",
+        "stance_A",
+        "stance_B",
+        "pct_A",
+        "pct_B",
+        "flag_reason"
+      ],
+      "duplicate_ids": 0,
+      "duplicate_normalized_texts": 59,
+      "empty_texts": 0,
+      "platforms": {
+        "snapchat": 220,
+        "youtube": 122
+      },
+      "labels": {
+        "unavailable": 342
+      }
+    },
+    "news-snapchat-noagegroup-mental-2024.jsonl": {
+      "rows": 676,
+      "sha256": "27bf25685b06ddf41791f4848ba6d5adb4ce11ae32835471afd9b874884f6315"
+    },
+    "news-youtube-noagegroup-mental-2024.jsonl": {
+      "rows": 1326,
+      "sha256": "98a752af15bcf3fc1fef8b6627c592290b3471bf5e3ec79900acbff306a9146c"
+    }
+  },
+  "overlaps": {
+    "High Confidence Relevant.csv / Recovered Relevant Articles Doccano.csv": 0,
+    "High Confidence Relevant.csv / Relevance Ambiguous.csv": 0,
+    "High Confidence Relevant.csv / Stance Ambiguous.csv": 0,
+    "Recovered Relevant Articles Doccano.csv / Relevance Ambiguous.csv": 220,
+    "Recovered Relevant Articles Doccano.csv / Stance Ambiguous.csv": 0,
+    "Relevance Ambiguous.csv / Stance Ambiguous.csv": 0
+  },
+  "review_subset": {
+    "size": 36,
+    "platforms": {
+      "snapchat": 16,
+      "youtube": 20
+    },
+    "strata_available": {
+      "snapchat / Mixed": 87,
+      "snapchat / Negative": 306,
+      "snapchat / Neutral": 14,
+      "snapchat / unresolved": 220,
+      "youtube / Mixed": 93,
+      "youtube / Negative": 354,
+      "youtube / Neutral": 7,
+      "youtube / Positive": 71,
+      "youtube / unresolved": 122
+    },
+    "status": "pending independent human review"
+  }
+}
