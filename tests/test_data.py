@@ -15,6 +15,13 @@ class DataTests(unittest.TestCase):
         self.assertEqual(groups["a"], groups["b"])
         self.assertNotEqual(groups["a"], groups["c"])
 
+    def test_syndicated_copy_below_old_cutoff_stays_in_one_group(self):
+        original = [f"word{i}" for i in range(165)]
+        copy = original.copy()
+        copy[80:85] = [f"replacement{i}" for i in range(5)]
+        groups, _ = duplicate_groups({"original": " ".join(original), "copy": " ".join(copy)})
+        self.assertEqual(groups["original"], groups["copy"])
+
     def test_group_reservation_and_partition_exclusivity(self):
         rows = [{"duplicate_group": f"{label}-{i}", "sentiment_3class": label}
                 for label in ("Positive", "Negative", "Neutral") for i in range(30)]

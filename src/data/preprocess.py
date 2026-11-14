@@ -50,7 +50,7 @@ def raw_records(source):
     return records
 
 
-def duplicate_groups(texts, threshold=0.9):
+def duplicate_groups(texts, threshold=0.85):
     """Connected components of >=threshold token-five-shingle Jaccard pairs.
 
     Exact hashes are input keys. Short documents use word sets. Quadratic pair
@@ -173,7 +173,7 @@ def prepare(source, review_manifest, output, public, seed=584):
              "date_min": min(dates) if dates else None, "date_max": max(dates) if dates else None,
              "unique_texts": len({r["text_sha256"] for r in records}),
              "duplicate_groups": len({r["duplicate_group"] for r in records}), "near_duplicate_pairs_including_review": pairs,
-             "similarity": "token-five-shingle Jaccard >= 0.9; connected components",
+             "similarity": "token-five-shingle Jaccard >= 0.85; connected components",
              "splits": {s: {"rows": sum(r["split"] == s for r in records),
                               "labels": dict(Counter(r["sentiment_3class"] for r in records if r["split"] == s))}
                         for s in ("train", "validation", "test", "review_reserved")},

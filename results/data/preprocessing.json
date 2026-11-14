@@ -11,40 +11,40 @@
   "date_min": "2024-01-01",
   "date_max": "2024-12-31",
   "unique_texts": 614,
-  "duplicate_groups": 437,
-  "near_duplicate_pairs_including_review": 1123,
-  "similarity": "token-five-shingle Jaccard >= 0.9; connected components",
+  "duplicate_groups": 405,
+  "near_duplicate_pairs_including_review": 1422,
+  "similarity": "token-five-shingle Jaccard >= 0.85; connected components",
   "splits": {
     "train": {
-      "rows": 339,
+      "rows": 329,
       "labels": {
-        "Negative": 257,
-        "Neutral": 48,
-        "Positive": 34
+        "Neutral": 45,
+        "Negative": 251,
+        "Positive": 33
       }
     },
     "validation": {
-      "rows": 113,
+      "rows": 110,
       "labels": {
-        "Neutral": 16,
-        "Negative": 86,
+        "Negative": 84,
+        "Neutral": 15,
         "Positive": 11
       }
     },
     "test": {
-      "rows": 113,
+      "rows": 110,
       "labels": {
         "Neutral": 15,
-        "Negative": 86,
-        "Positive": 12
+        "Negative": 84,
+        "Positive": 11
       }
     },
     "review_reserved": {
-      "rows": 193,
+      "rows": 209,
       "labels": {
-        "Neutral": 67,
-        "Negative": 113,
-        "Positive": 13
+        "Neutral": 71,
+        "Negative": 123,
+        "Positive": 15
       }
     }
   },
@@ -59,7 +59,7 @@
       "Neutral": 84
     }
   },
-  "dataset_sha256": "838634046369674f42fd89b63728cb39af73df72af62941a155e3079f08847b8",
-  "split_manifest_sha256": "743631c863d88136963b7ca2fca69a2944a2e733472d32d93853ff38dd23d1c5",
-  "review_manifest_sha256": "8db628b9fd4e667205f5f893caf8090496e5532e831b55dadd9d7f34912f57b3"
+  "dataset_sha256": "f2a3d410ff7849be6ff7bb8f46c07aed66ae4bc5c7d13b6f1a21e7bede935448",
+  "split_manifest_sha256": "b83239247871fd6b923a23cc95999f6323f297b481e2a0875c9a03f1673b9537",
+  "review_manifest_sha256": "83bda0c07628187745efd7b96ec1761763b1a9c3181189100290d4623f9a4522"
 }
