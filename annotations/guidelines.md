@@ -1,4 +1,4 @@
-# Annotation guidelines, v1
+# Annotation guidelines, v1.1
 
 ## What we are labeling
 
@@ -27,6 +27,12 @@ Use the full article rather than only the headline. Attribute quoted claims to t
 
 Choose **zero to three primary topics**, using the exact names below. A topic needs explicit evidence related to mental health, not just a keyword. If more than three qualify, choose those receiving the most substantive attention and note the others for adjudication. The cap follows the source notebook's per-annotator prompt. Its later union of model topic lists can exceed three, so those outputs would need reconciliation before comparison.
 
+A primary topic must be central to the article's explanation of an impact, response, or intervention. Look for a substantive passage or repeated discussion with supporting detail. A name, risk list, related-story link, or boilerplate mention is insufficient. If more than three topics qualify, prioritize the article's main argument and supporting detail; flag close ties for adjudication.
+
+Apply topics to the named platform. General social-media claims can qualify when the article clearly includes that platform in their scope. Do not transfer claims explicitly limited to another platform. Note ambiguous attribution for adjudication.
+
+Keep the source's 12 topics for this phase. Substance use remains outside this vocabulary; record relevant evidence in notes for a later schema review. A reviewed empty set is valid when no listed primary topic applies.
+
 | Topic | Include | Exclude |
 | --- | --- | --- |
 | Anxiety | Anxiety or persistent worry tied to platform use. | A generic concern about a product. |
@@ -37,7 +43,7 @@ Choose **zero to three primary topics**, using the exact names below. A topic ne
 | Addiction/Overuse | Compulsive use, dependency, or harmful excessive use. | High usage statistics without harm framing. |
 | Sleep Disruption | Platform-related sleep loss or disrupted sleep. | Nighttime use with no sleep claim. |
 | Policy/Lawsuits/Bans | Regulation, litigation, or restrictions linked to mental health. | Unrelated business disputes. |
-| School/Education | School policies, learning, or education linked to well-being. | A person merely being described as a student. |
+| School/Education | School policies, learning, educational content, or public-health education with an explicit youth well-being connection. | Student status, generic advice, or a passing mention of education. |
 | Therapy/Access to Care | Treatment, counseling, or access to mental-health support. | Generic advice without care or treatment. |
 | Stigma/Awareness | Mental-health awareness, disclosure, stigma, or normalization. | Any mental-health mention by itself. |
 | Parental Controls/Safety Features | Parental controls or platform protections tied to well-being. | A feature announcement with no relevant connection. |
@@ -65,5 +71,7 @@ These are invented examples for understanding the rules, not dataset observation
 No reviews have been completed in this contribution. The subset is organized and ready to distribute.
 
 ## Provenance
+
+v1.1 clarifies topic prominence, educational coverage, and platform attribution. The label names and three-topic cap are unchanged.
 
 Vocabulary and four-class stance definition: [SCREEN repository](https://github.com/LEAF-Lab-Stevens/SCREEN-Dataset/tree/246d3d365d5898f6fdf5240264215e49b082d743), README and Stage 2 notebook. The youth-specific relevance clarification and review procedure above are our proposed project protocol, not a claim about the source annotators' decisions.
