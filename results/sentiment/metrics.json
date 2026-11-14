@@ -1,0 +1,767 @@
+{
+  "scope": "agreement with intermediate source labels, not independent human-gold accuracy",
+  "run_utc": "2026-11-14T02:49:39.439277+00:00",
+  "config": {
+    "max_features": 20000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "sublinear_tf": true,
+    "stop_words": null,
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "solver": "lbfgs",
+    "seed": 584
+  },
+  "dataset_sha256": "f2a3d410ff7849be6ff7bb8f46c07aed66ae4bc5c7d13b6f1a21e7bede935448",
+  "split_manifest_sha256": "b83239247871fd6b923a23cc95999f6323f297b481e2a0875c9a03f1673b9537",
+  "source_commit": "246d3d365d5898f6fdf5240264215e49b082d743",
+  "versions": {
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "joblib": "1.5.3"
+  },
+  "training_n": 329,
+  "training_labels": {
+    "Neutral": 45,
+    "Negative": 251,
+    "Positive": 33
+  },
+  "vocabulary_size": {
+    "text_only": 20000,
+    "platform_aware": 20000
+  },
+  "iterations": {
+    "text_only": [
+      19
+    ],
+    "platform_aware": [
+      19
+    ]
+  },
+  "platform_feature": "A platform_<name> token is prepended to each text for the platform-aware model.",
+  "evaluations": {
+    "validation": {
+      "majority": {
+        "n": 110,
+        "accuracy": 0.7636363636363637,
+        "macro_precision": 0.2545454545454546,
+        "macro_recall": 0.3333333333333333,
+        "macro_f1": 0.288659793814433,
+        "per_class": {
+          "Positive": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 11.0
+          },
+          "Negative": {
+            "precision": 0.7636363636363637,
+            "recall": 1.0,
+            "f1-score": 0.865979381443299,
+            "support": 84.0
+          },
+          "Neutral": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 15.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            11,
+            0
+          ],
+          [
+            0,
+            84,
+            0
+          ],
+          [
+            0,
+            15,
+            0
+          ]
+        ],
+        "label_order": [
+          "Positive",
+          "Negative",
+          "Neutral"
+        ]
+      },
+      "text_only": {
+        "overall": {
+          "n": 110,
+          "accuracy": 0.8272727272727273,
+          "macro_precision": 0.6885542168674698,
+          "macro_recall": 0.7076479076479076,
+          "macro_f1": 0.6975961121235789,
+          "per_class": {
+            "Positive": {
+              "precision": 0.75,
+              "recall": 0.8181818181818182,
+              "f1-score": 0.782608695652174,
+              "support": 11.0
+            },
+            "Negative": {
+              "precision": 0.9156626506024096,
+              "recall": 0.9047619047619048,
+              "f1-score": 0.9101796407185628,
+              "support": 84.0
+            },
+            "Neutral": {
+              "precision": 0.4,
+              "recall": 0.4,
+              "f1-score": 0.4,
+              "support": 15.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              9,
+              0,
+              2
+            ],
+            [
+              1,
+              76,
+              7
+            ],
+            [
+              2,
+              7,
+              6
+            ]
+          ],
+          "label_order": [
+            "Positive",
+            "Negative",
+            "Neutral"
+          ]
+        },
+        "by_platform": {
+          "youtube": {
+            "n": 60,
+            "accuracy": 0.7833333333333333,
+            "macro_precision": 0.6602564102564102,
+            "macro_recall": 0.6755050505050506,
+            "macro_f1": 0.6673393261175319,
+            "per_class": {
+              "Positive": {
+                "precision": 0.75,
+                "recall": 0.8181818181818182,
+                "f1-score": 0.782608695652174,
+                "support": 11.0
+              },
+              "Negative": {
+                "precision": 0.8974358974358975,
+                "recall": 0.875,
+                "f1-score": 0.8860759493670886,
+                "support": 40.0
+              },
+              "Neutral": {
+                "precision": 0.3333333333333333,
+                "recall": 0.3333333333333333,
+                "f1-score": 0.3333333333333333,
+                "support": 9.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                9,
+                0,
+                2
+              ],
+              [
+                1,
+                35,
+                4
+              ],
+              [
+                2,
+                4,
+                3
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          },
+          "snapchat": {
+            "n": 50,
+            "accuracy": 0.88,
+            "macro_precision": 0.47727272727272724,
+            "macro_recall": 0.47727272727272724,
+            "macro_f1": 0.47727272727272724,
+            "per_class": {
+              "Positive": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1-score": 0.0,
+                "support": 0.0
+              },
+              "Negative": {
+                "precision": 0.9318181818181818,
+                "recall": 0.9318181818181818,
+                "f1-score": 0.9318181818181818,
+                "support": 44.0
+              },
+              "Neutral": {
+                "precision": 0.5,
+                "recall": 0.5,
+                "f1-score": 0.5,
+                "support": 6.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                41,
+                3
+              ],
+              [
+                0,
+                3,
+                3
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          }
+        }
+      },
+      "platform_aware": {
+        "overall": {
+          "n": 110,
+          "accuracy": 0.8272727272727273,
+          "macro_precision": 0.6885542168674698,
+          "macro_recall": 0.7076479076479076,
+          "macro_f1": 0.6975961121235789,
+          "per_class": {
+            "Positive": {
+              "precision": 0.75,
+              "recall": 0.8181818181818182,
+              "f1-score": 0.782608695652174,
+              "support": 11.0
+            },
+            "Negative": {
+              "precision": 0.9156626506024096,
+              "recall": 0.9047619047619048,
+              "f1-score": 0.9101796407185628,
+              "support": 84.0
+            },
+            "Neutral": {
+              "precision": 0.4,
+              "recall": 0.4,
+              "f1-score": 0.4,
+              "support": 15.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              9,
+              0,
+              2
+            ],
+            [
+              1,
+              76,
+              7
+            ],
+            [
+              2,
+              7,
+              6
+            ]
+          ],
+          "label_order": [
+            "Positive",
+            "Negative",
+            "Neutral"
+          ]
+        },
+        "by_platform": {
+          "youtube": {
+            "n": 60,
+            "accuracy": 0.7833333333333333,
+            "macro_precision": 0.6602564102564102,
+            "macro_recall": 0.6755050505050506,
+            "macro_f1": 0.6673393261175319,
+            "per_class": {
+              "Positive": {
+                "precision": 0.75,
+                "recall": 0.8181818181818182,
+                "f1-score": 0.782608695652174,
+                "support": 11.0
+              },
+              "Negative": {
+                "precision": 0.8974358974358975,
+                "recall": 0.875,
+                "f1-score": 0.8860759493670886,
+                "support": 40.0
+              },
+              "Neutral": {
+                "precision": 0.3333333333333333,
+                "recall": 0.3333333333333333,
+                "f1-score": 0.3333333333333333,
+                "support": 9.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                9,
+                0,
+                2
+              ],
+              [
+                1,
+                35,
+                4
+              ],
+              [
+                2,
+                4,
+                3
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          },
+          "snapchat": {
+            "n": 50,
+            "accuracy": 0.88,
+            "macro_precision": 0.47727272727272724,
+            "macro_recall": 0.47727272727272724,
+            "macro_f1": 0.47727272727272724,
+            "per_class": {
+              "Positive": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1-score": 0.0,
+                "support": 0.0
+              },
+              "Negative": {
+                "precision": 0.9318181818181818,
+                "recall": 0.9318181818181818,
+                "f1-score": 0.9318181818181818,
+                "support": 44.0
+              },
+              "Neutral": {
+                "precision": 0.5,
+                "recall": 0.5,
+                "f1-score": 0.5,
+                "support": 6.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                41,
+                3
+              ],
+              [
+                0,
+                3,
+                3
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          }
+        }
+      }
+    },
+    "test": {
+      "majority": {
+        "n": 110,
+        "accuracy": 0.7636363636363637,
+        "macro_precision": 0.2545454545454546,
+        "macro_recall": 0.3333333333333333,
+        "macro_f1": 0.288659793814433,
+        "per_class": {
+          "Positive": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 11.0
+          },
+          "Negative": {
+            "precision": 0.7636363636363637,
+            "recall": 1.0,
+            "f1-score": 0.865979381443299,
+            "support": 84.0
+          },
+          "Neutral": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 15.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            11,
+            0
+          ],
+          [
+            0,
+            84,
+            0
+          ],
+          [
+            0,
+            15,
+            0
+          ]
+        ],
+        "label_order": [
+          "Positive",
+          "Negative",
+          "Neutral"
+        ]
+      },
+      "text_only": {
+        "overall": {
+          "n": 110,
+          "accuracy": 0.8636363636363636,
+          "macro_precision": 0.7961760461760461,
+          "macro_recall": 0.8674603174603175,
+          "macro_f1": 0.8248217161260639,
+          "per_class": {
+            "Positive": {
+              "precision": 0.9166666666666666,
+              "recall": 1.0,
+              "f1-score": 0.9565217391304348,
+              "support": 11.0
+            },
+            "Negative": {
+              "precision": 0.948051948051948,
+              "recall": 0.8690476190476191,
+              "f1-score": 0.906832298136646,
+              "support": 84.0
+            },
+            "Neutral": {
+              "precision": 0.5238095238095238,
+              "recall": 0.7333333333333333,
+              "f1-score": 0.6111111111111112,
+              "support": 15.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              11,
+              0,
+              0
+            ],
+            [
+              1,
+              73,
+              10
+            ],
+            [
+              0,
+              4,
+              11
+            ]
+          ],
+          "label_order": [
+            "Positive",
+            "Negative",
+            "Neutral"
+          ]
+        },
+        "by_platform": {
+          "youtube": {
+            "n": 60,
+            "accuracy": 0.8833333333333333,
+            "macro_precision": 0.7967836257309941,
+            "macro_recall": 0.8979328165374677,
+            "macro_f1": 0.8317006620146716,
+            "per_class": {
+              "Positive": {
+                "precision": 0.9166666666666666,
+                "recall": 1.0,
+                "f1-score": 0.9565217391304348,
+                "support": 11.0
+              },
+              "Negative": {
+                "precision": 0.9736842105263158,
+                "recall": 0.8604651162790697,
+                "f1-score": 0.9135802469135802,
+                "support": 43.0
+              },
+              "Neutral": {
+                "precision": 0.5,
+                "recall": 0.8333333333333334,
+                "f1-score": 0.625,
+                "support": 6.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                11,
+                0,
+                0
+              ],
+              [
+                1,
+                37,
+                5
+              ],
+              [
+                0,
+                1,
+                5
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          },
+          "snapchat": {
+            "n": 50,
+            "accuracy": 0.84,
+            "macro_precision": 0.48951048951048953,
+            "macro_recall": 0.5149051490514905,
+            "macro_f1": 0.5,
+            "per_class": {
+              "Positive": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1-score": 0.0,
+                "support": 0.0
+              },
+              "Negative": {
+                "precision": 0.9230769230769231,
+                "recall": 0.8780487804878049,
+                "f1-score": 0.9,
+                "support": 41.0
+              },
+              "Neutral": {
+                "precision": 0.5454545454545454,
+                "recall": 0.6666666666666666,
+                "f1-score": 0.6,
+                "support": 9.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                36,
+                5
+              ],
+              [
+                0,
+                3,
+                6
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          }
+        }
+      },
+      "platform_aware": {
+        "overall": {
+          "n": 110,
+          "accuracy": 0.8636363636363636,
+          "macro_precision": 0.7961760461760461,
+          "macro_recall": 0.8674603174603175,
+          "macro_f1": 0.8248217161260639,
+          "per_class": {
+            "Positive": {
+              "precision": 0.9166666666666666,
+              "recall": 1.0,
+              "f1-score": 0.9565217391304348,
+              "support": 11.0
+            },
+            "Negative": {
+              "precision": 0.948051948051948,
+              "recall": 0.8690476190476191,
+              "f1-score": 0.906832298136646,
+              "support": 84.0
+            },
+            "Neutral": {
+              "precision": 0.5238095238095238,
+              "recall": 0.7333333333333333,
+              "f1-score": 0.6111111111111112,
+              "support": 15.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              11,
+              0,
+              0
+            ],
+            [
+              1,
+              73,
+              10
+            ],
+            [
+              0,
+              4,
+              11
+            ]
+          ],
+          "label_order": [
+            "Positive",
+            "Negative",
+            "Neutral"
+          ]
+        },
+        "by_platform": {
+          "youtube": {
+            "n": 60,
+            "accuracy": 0.8833333333333333,
+            "macro_precision": 0.7967836257309941,
+            "macro_recall": 0.8979328165374677,
+            "macro_f1": 0.8317006620146716,
+            "per_class": {
+              "Positive": {
+                "precision": 0.9166666666666666,
+                "recall": 1.0,
+                "f1-score": 0.9565217391304348,
+                "support": 11.0
+              },
+              "Negative": {
+                "precision": 0.9736842105263158,
+                "recall": 0.8604651162790697,
+                "f1-score": 0.9135802469135802,
+                "support": 43.0
+              },
+              "Neutral": {
+                "precision": 0.5,
+                "recall": 0.8333333333333334,
+                "f1-score": 0.625,
+                "support": 6.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                11,
+                0,
+                0
+              ],
+              [
+                1,
+                37,
+                5
+              ],
+              [
+                0,
+                1,
+                5
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          },
+          "snapchat": {
+            "n": 50,
+            "accuracy": 0.84,
+            "macro_precision": 0.48951048951048953,
+            "macro_recall": 0.5149051490514905,
+            "macro_f1": 0.5,
+            "per_class": {
+              "Positive": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1-score": 0.0,
+                "support": 0.0
+              },
+              "Negative": {
+                "precision": 0.9230769230769231,
+                "recall": 0.8780487804878049,
+                "f1-score": 0.9,
+                "support": 41.0
+              },
+              "Neutral": {
+                "precision": 0.5454545454545454,
+                "recall": 0.6666666666666666,
+                "f1-score": 0.6,
+                "support": 9.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                36,
+                5
+              ],
+              [
+                0,
+                3,
+                6
+              ]
+            ],
+            "label_order": [
+              "Positive",
+              "Negative",
+              "Neutral"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "platform_aware_test_error_counts": {
+    "Neutral -> Negative": 4,
+    "Negative -> Neutral": 10,
+    "Negative -> Positive": 1
+  },
+  "platform_aware_illustrative_test_error_ids": [
+    "snapchat|102|Meta, Snapchat, and TikTok launch the new Thrive mental health initiative, and it's about time",
+    "snapchat|104|Meta, Snap, TikTok join forces to combat suicide and self-harm content",
+    "snapchat|105|UK could follow Australia in banning social media for young teenagers",
+    "snapchat|106|Meta teams up with Snap and TikTok to address self-harm content",
+    "snapchat|228|Snapchat is walking back a friend ranking feature after reports of teen anxiety"
+  ]
+}
