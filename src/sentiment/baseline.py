@@ -34,6 +34,13 @@ def make_model():
                                            max_iter=CONFIG["max_iter"], solver=CONFIG["solver"], random_state=CONFIG["seed"]))])
 
 
+def model_input(row, include_platform):
+    """Append a categorical cue because the labels describe platform framing."""
+    if include_platform:
+        return f"platform_{row['platform']} {row['text']}"
+    return row["text"]
+
+
 def validate_records(rows):
     if not rows or len({r["doc_id"] for r in rows}) != len(rows):
         raise ValueError("Dataset must have unique identifiers")
@@ -87,8 +94,10 @@ def load_verified(dataset, manifest, preprocessing):
 def run(dataset, manifest, preprocessing, output, model_path):
     rows, provenance = load_verified(dataset, manifest, preprocessing)
     train = [r for r in rows if r["split"] == "train"]
-    model = make_model()
-    model.fit([r["text"] for r in train], [r["sentiment_3class"] for r in train])
+    models = {"text_only": make_model(), "platform_aware": make_model()}
+    for name, model in models.items():
+        model.fit([model_input(r, name == "platform_aware") for r in train],
+                  [r["sentiment_3class"] for r in train])
     majority = DummyClassifier(strategy="most_frequent")
     majority.fit([[0]] * len(train), [r["sentiment_3class"] for r in train])
     result = {"scope": "agreement with intermediate source labels, not independent human-gold accuracy",
@@ -97,37 +106,42 @@ def run(dataset, manifest, preprocessing, output, model_path):
               "source_commit": provenance["source_commit"],
               "versions": {p: importlib.metadata.version(p) for p in ("scikit-learn", "numpy", "scipy", "joblib")},
               "training_n": len(train), "training_labels": dict(Counter(r["sentiment_3class"] for r in train)),
-              "vocabulary_size": len(model["tfidf"].vocabulary_),
-              "iterations": model["classifier"].n_iter_.tolist(), "evaluations": {}}
+              "vocabulary_size": {name: len(model["tfidf"].vocabulary_) for name, model in models.items()},
+              "iterations": {name: model["classifier"].n_iter_.tolist() for name, model in models.items()},
+              "platform_feature": "A platform_<name> token is prepended to each text for the platform-aware model.",
+              "evaluations": {}}
     output.mkdir(parents=True, exist_ok=True)
     prediction_rows = []
     for split in ("validation", "test"):
         subset = [r for r in rows if r["split"] == split]
         y = [r["sentiment_3class"] for r in subset]
-        predicted = model.predict([r["text"] for r in subset])
-        probabilities = model.predict_proba([r["text"] for r in subset])
-        result["evaluations"][split] = {"logistic_regression": metrics(y, predicted),
-                                        "majority": metrics(y, majority.predict([[0]] * len(y))),
-                                        "by_platform": {}}
-        for platform in ("youtube", "snapchat"):
-            indices = [i for i, row in enumerate(subset) if row["platform"] == platform]
-            if indices:
-                result["evaluations"][split]["by_platform"][platform] = metrics([y[i] for i in indices], [predicted[i] for i in indices])
-        for row, pred, probability in zip(subset, predicted, probabilities):
-            prediction_rows.append({"doc_id": row["doc_id"], "platform": row["platform"], "split": split,
-                                    "reference": row["sentiment_3class"], "prediction": str(pred),
-                                    "probabilities_uncalibrated": dict(zip(model.classes_, map(float, probability)))})
-        fig, ax = plt.subplots(figsize=(6, 5), constrained_layout=True)
-        ConfusionMatrixDisplay.from_predictions(y, predicted, labels=LABELS, ax=ax, cmap="Blues", colorbar=False)
-        ax.set_title(f"TF-IDF + logistic regression: {split} (n={len(y)})\nGrouped split; intermediate source labels")
-        save_svg(fig, output / f"{split}_confusion.svg"); plt.close(fig)
-    errors = [r for r in prediction_rows if r["split"] == "test" and r["reference"] != r["prediction"]]
-    result["test_error_counts"] = dict(Counter(f"{r['reference']} -> {r['prediction']}" for r in errors))
-    result["illustrative_test_error_ids"] = [r["doc_id"] for r in errors[:5]]
+        result["evaluations"][split] = {"majority": metrics(y, majority.predict([[0]] * len(y)))}
+        for name, model in models.items():
+            predicted = model.predict([model_input(r, name == "platform_aware") for r in subset])
+            probabilities = model.predict_proba([model_input(r, name == "platform_aware") for r in subset])
+            result["evaluations"][split][name] = {"overall": metrics(y, predicted), "by_platform": {}}
+            for platform in ("youtube", "snapchat"):
+                indices = [i for i, row in enumerate(subset) if row["platform"] == platform]
+                if indices:
+                    result["evaluations"][split][name]["by_platform"][platform] = metrics(
+                        [y[i] for i in indices], [predicted[i] for i in indices])
+            for row, pred, probability in zip(subset, predicted, probabilities):
+                prediction_rows.append({"doc_id": row["doc_id"], "platform": row["platform"], "split": split,
+                                        "model": name, "reference": row["sentiment_3class"], "prediction": str(pred),
+                                        "probabilities_uncalibrated": dict(zip(model.classes_, map(float, probability)))})
+            fig, ax = plt.subplots(figsize=(6, 5), constrained_layout=True)
+            ConfusionMatrixDisplay.from_predictions(y, predicted, labels=LABELS, ax=ax, cmap="Blues", colorbar=False)
+            title = "platform-aware" if name == "platform_aware" else "text-only"
+            ax.set_title(f"TF-IDF + logistic regression ({title}): {split} (n={len(y)})\nGrouped split; intermediate source labels")
+            suffix = "" if name == "platform_aware" else "_text_only"
+            save_svg(fig, output / f"{split}{suffix}_confusion.svg"); plt.close(fig)
+    errors = [r for r in prediction_rows if r["split"] == "test" and r["model"] == "platform_aware" and r["reference"] != r["prediction"]]
+    result["platform_aware_test_error_counts"] = dict(Counter(f"{r['reference']} -> {r['prediction']}" for r in errors))
+    result["platform_aware_illustrative_test_error_ids"] = [r["doc_id"] for r in errors[:5]]
     (output / "metrics.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     (output / "predictions.jsonl").write_text("".join(json.dumps(r) + "\n" for r in prediction_rows), encoding="utf-8")
     model_path.parent.mkdir(parents=True, exist_ok=True)
-    joblib.dump(model, model_path)
+    joblib.dump(models["platform_aware"], model_path)
     return result
 
 

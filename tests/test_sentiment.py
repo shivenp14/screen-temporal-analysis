@@ -1,5 +1,6 @@
 import unittest
-from src.sentiment.baseline import make_model, metrics, validate_records
+
+from src.sentiment.baseline import make_model, metrics, model_input, validate_records
 
 
 class SentimentTests(unittest.TestCase):
@@ -22,6 +23,12 @@ class SentimentTests(unittest.TestCase):
         self.assertEqual(result["accuracy"], 1)
         self.assertAlmostEqual(result["macro_f1"], 2/3)
         self.assertEqual(result["per_class"]["Positive"]["support"], 0)
+
+    def test_platform_aware_input_distinguishes_identical_cross_platform_text(self):
+        article = {"text": "Identical report text", "platform": "snapchat"}
+        other_platform = {"text": "Identical report text", "platform": "youtube"}
+        self.assertNotEqual(model_input(article, True), model_input(other_platform, True))
+        self.assertEqual(model_input(article, False), model_input(other_platform, False))
 
 
 if __name__ == "__main__":
