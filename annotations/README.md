@@ -26,6 +26,8 @@ python -m src.llm.agreement --first data/processed/review/reviewer_1.csv --secon
 
 Blank sheets fail validation rather than producing scores. The script requires two named reviewers, matching identifiers, evidence/confidence for relevant items, and valid labels. It reports relevance agreement, four-class and proposal-mapped stance agreement/kappa, topic agreement/Jaccard, exclusions, and items needing adjudication. Undefined kappa is `null`, not zero. This checks file structure; the team must ensure reviews were actually independent.
 
+If either reviewer marks an item `skipped`, the script excludes it from all agreement calculations and reports its count and identifier separately. `uncertain` remains a relevance judgment and is included in relevance agreement.
+
 ## LLM pilot
 
 The `prepare` command writes one request per article. Each request records the complete messages, mode, text hash, prompt hash, truncation flag, character limit, and example identifiers. The default includes the first 12,000 characters, not tokens. Review truncation counts before execution; repeat with a larger limit or a documented full-text strategy if conclusions depend on the ending. The requests include only article text and platform, not source labels or review answers.

@@ -1,8 +1,11 @@
 import unittest
+import csv
+import tempfile
+from pathlib import Path
 
 from src.llm.classify import build_requests, score
 from src.llm.schema import validate_prediction
-from src.llm.agreement import agreement, categorical
+from src.llm.agreement import agreement, categorical, read_reviews
 
 
 class PilotTests(unittest.TestCase):
@@ -75,6 +78,36 @@ class PilotTests(unittest.TestCase):
         self.assertEqual(result["needs_adjudication"], ["1"])
         with self.assertRaises(ValueError):
             agreement(a, a)
+
+    def test_skipped_reviews_are_accepted_and_excluded_from_agreement(self):
+        fields = ["doc_id", "reviewer", "relevance", "stance", "topics", "evidence", "confidence", "notes"]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "reviewer.csv"
+            with path.open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=fields)
+                writer.writeheader()
+                writer.writerow({"doc_id": "skip", "reviewer": "one", "relevance": "skipped",
+                                 "notes": "Stopped reading distressing content"})
+            reviews = read_reviews(path)
+        a = {"skip": reviews["skip"],
+             "scored": {"doc_id": "scored", "reviewer": "one", "relevance": "yes",
+                        "stance": "Mixed", "topics": []},
+             "uncertain": {"doc_id": "uncertain", "reviewer": "one", "relevance": "uncertain",
+                           "stance": "", "topics": ""}}
+        b = {"skip": {"doc_id": "skip", "reviewer": "two", "relevance": "yes",
+                      "stance": "Negative", "topics": ["Anxiety"]},
+             "scored": {"doc_id": "scored", "reviewer": "two", "relevance": "yes",
+                        "stance": "Neutral", "topics": []},
+             "uncertain": {"doc_id": "uncertain", "reviewer": "two", "relevance": "uncertain",
+                           "stance": "", "topics": ""}}
+        result = agreement(a, b)
+        self.assertEqual(result["relevance"]["n"], 2)
+        self.assertEqual(result["stance_four_class"]["n"], 1)
+        self.assertEqual(result["skipped_items"]["n_skipped_by_either"], 1)
+        self.assertEqual(result["skipped_items"]["n_skipped_by_both"], 0)
+        self.assertEqual(result["skipped_items"]["doc_ids"], ["skip"])
+        self.assertNotIn("skip", result["needs_adjudication"])
+        self.assertIn("uncertain", result["needs_adjudication"])
 
 
 if __name__ == "__main__":
