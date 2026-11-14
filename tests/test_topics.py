@@ -1,36 +1,22 @@
 import unittest
-import tempfile
-from pathlib import Path
-from unittest.mock import patch
-from src.topics.baseline import training_texts, keyword_cues, CUES, topic_inventory, SOURCE_COMMIT
-from src.llm.schema import TOPICS
+
+from src.topics.prepare_pilot import select_packet
 
 
-class TopicTests(unittest.TestCase):
-    def test_inventory_hash_ignores_line_endings_but_detects_content_changes(self):
-        with tempfile.TemporaryDirectory() as directory:
-            source = Path(directory)
-            (source / "Dataset").mkdir()
-            csv_path = source / "Dataset" / "articles.csv"
-            csv_path.write_bytes(b'doc_id,text\n1,"first\nsecond"\n')
-            with patch("src.topics.baseline.subprocess.check_output", side_effect=[SOURCE_COMMIT, ""] * 3):
-                lf = topic_inventory(source)
-                csv_path.write_bytes(csv_path.read_bytes().replace(b"\n", b"\r\n"))
-                self.assertEqual(lf, topic_inventory(source))
-                csv_path.write_bytes(b"doc_id,text\r\n1,changed\r\n")
-                self.assertNotEqual(lf["articles.csv"]["sha256"], topic_inventory(source)["articles.csv"]["sha256"])
-
-    def test_exploration_uses_only_unique_training_texts(self):
-        rows = [{"doc_id": "1", "split": "train", "text_sha256": "a"},
-                {"doc_id": "2", "split": "train", "text_sha256": "a"},
-                {"doc_id": "3", "split": "test", "text_sha256": "b"},
-                {"doc_id": "4", "split": "review_reserved", "text_sha256": "c"}]
-        self.assertEqual([r["doc_id"] for r in training_texts(rows)], ["1"])
-
-    def test_cues_are_vocabulary_bound_and_count_once(self):
-        self.assertEqual(set(CUES), set(TOPICS))
-        self.assertEqual(keyword_cues("Anxiety and anxiety."), ["Anxiety"])
-        self.assertEqual(keyword_cues("ordinary product announcement"), [])
+class TopicPacketTests(unittest.TestCase):
+    def test_packet_uses_distinct_training_groups_and_is_deterministic(self):
+        rows = [{"doc_id": f"id-{i:02d}", "platform": "youtube", "text": "anxiety and sleep disruption",
+                 "duplicate_group": f"group-{i:02d}", "split": "train"}
+                for i in range(52)]
+        rows.extend([{"doc_id": "held-out", "platform": "youtube", "text": "anxiety",
+                      "duplicate_group": "held-out-group", "split": "test"}])
+        pilot, practice = select_packet(rows)
+        pilot_again, practice_again = select_packet(rows)
+        self.assertEqual([r["doc_id"] for r in pilot], [r["doc_id"] for r in pilot_again])
+        self.assertEqual([r["doc_id"] for r in practice], [r["doc_id"] for r in practice_again])
+        self.assertEqual((len(pilot), len(practice)), (40, 6))
+        self.assertEqual(len({r["duplicate_group"] for r in pilot + practice}), 46)
+        self.assertNotIn("held-out", {r["doc_id"] for r in pilot + practice})
 
 
 if __name__ == "__main__":
