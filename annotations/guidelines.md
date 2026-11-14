@@ -8,9 +8,9 @@ SCREEN uses four stance labels. Keep all four in the annotation files. Our proje
 
 ## Relevance first
 
-Use `yes`, `no`, or `uncertain`. A relevant article substantively connects the named platform to mental health or well-being in young people. A platform being mentioned as the place a video was posted is not enough. Policy stories qualify when they connect platform use or design to mental-health risks or benefits. General adult mental-health coverage without a youth connection should be flagged for discussion.
+Use `yes`, `no`, `uncertain`, or `skipped`. A relevant article substantively connects the named platform to mental health or well-being in young people. A platform being mentioned as the place a video was posted is not enough. Policy stories qualify when they connect platform use or design to mental-health risks or benefits. General adult mental-health coverage without a youth connection should be flagged for discussion. Use `uncertain` when you read the article but cannot decide whether it meets the relevance definition. Use `skipped` when you cannot review the item, such as when you need to stop reading distressing content; briefly note the reason.
 
-For `no` or `uncertain`, leave stance and topics blank and explain why. Do not turn missing context into Neutral. Relevance disagreements go to adjudication before stance evaluation.
+For `no`, `uncertain`, or `skipped`, leave stance and topics blank and explain why. Do not turn missing context into Neutral. Skipped items are excluded from all agreement calculations and counted separately. Uncertain items remain in relevance agreement and are flagged for adjudication; they are not skips. Relevance disagreements go to adjudication before stance evaluation.
 
 ## Stance
 
@@ -63,8 +63,8 @@ These are invented examples for understanding the rules, not dataset observation
 
 1. Collin prepares the packet with `python -m src.llm.prepare_review`. Share `articles.jsonl` and one blank reviewer sheet per reviewer. Keep `reference_private.csv`, sampling metadata, and model predictions out of the review packet.
 2. Two team members independently label the same 36 articles. Suggested pairing: Collin and Tia, subject to availability. Start with six practice items, discuss the guideline, then independently re-review them under the frozen version before scoring agreement. Do not count practice discussion as independent agreement.
-3. Each reviewer fills in their own name, relevance, stance, topics, a short evidence excerpt or paragraph reference, confidence (`high`, `medium`, `low`), and any notes. Read the full article; skip distressing content if needed and note the skip.
-4. Compare relevance first. On jointly relevant articles, calculate raw stance agreement and Cohen's kappa before resolving disagreements. Report the denominator, excluded/skipped items, and class counts. For topics, report per-topic binary agreement and set Jaccard; define two empty sets as Jaccard 1. Do not report agreement statistics until two independent reviews exist.
+3. Each reviewer fills in their own name, relevance, stance, topics, a short evidence excerpt or paragraph reference, confidence (`high`, `medium`, `low`), and any notes. Read the full article; if you need to stop, mark relevance `skipped`, leave stance/topics blank, and note the skip.
+4. Compare relevance first. Agreement calculations exclude an item if either reviewer marked it `skipped`; report skipped counts separately. On the remaining jointly relevant articles, calculate raw stance agreement and Cohen's kappa before resolving disagreements. Report each denominator and class counts. For topics, report per-topic binary agreement and set Jaccard; define two empty sets as Jaccard 1. Do not report agreement statistics until two independent reviews exist.
 5. A third team member resolves disagreements using both evidence notes and the full article. Record the final decision, adjudicator, date, and guideline version; preserve both original reviews. Mark only resolved items `adjudicated`.
 6. Reserve the reviewed articles and matching normalized text hashes from training and prompt examples. Tia should extend this exclusion to near-duplicate articles. The packet is a diagnostic subset, not a representative estimate of platform prevalence or the final benchmark.
 
@@ -72,6 +72,5 @@ No reviews have been completed in this contribution. The subset is organized and
 
 ## Provenance
 
-v1.1 clarifies topic prominence, educational coverage, and platform attribution. The label names and three-topic cap are unchanged.
-
+v1.1 clarifies topic prominence, educational coverage, platform attribution, and the separate handling of skipped items. Skipped items are excluded from agreement calculations and counted separately; the topic names and three-topic cap are unchanged.
 Vocabulary and four-class stance definition: [SCREEN repository](https://github.com/LEAF-Lab-Stevens/SCREEN-Dataset/tree/246d3d365d5898f6fdf5240264215e49b082d743), README and Stage 2 notebook. The youth-specific relevance clarification and review procedure above are our proposed project protocol, not a claim about the source annotators' decisions.
