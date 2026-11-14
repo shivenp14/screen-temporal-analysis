@@ -29,7 +29,7 @@ Preprocessing writes full article records under ignored `data/processed/screen/`
 
 ## Reading the results
 
-The executed run retains **758 article/platform records** after removing 174 within-platform copies. Those records contain 614 distinct normalized texts in 437 duplicate components. All retained dates parse and fall within 2024. There were no conflicting-label exact duplicates within a platform in this run.
+The executed run retains **758 article/platform records** after removing 174 within-platform copies. Those records contain 614 distinct normalized texts in 405 duplicate components. All retained dates parse and fall within 2024. There were no conflicting-label exact duplicates within a platform in this run.
 
 The benchmark uses 329 training, 110 validation, and 110 test records. A further 209 records are reserved because their duplicate component intersects the review packet. This reservation is larger than the 36 selected review items because it includes related articles, not just the selected identifiers. After the duplicate cutoff was tightened, the retained set has 405 duplicate components and 1,422 near-duplicate pairs when the review texts are included. The shared test split was regenerated from these groups.
 
